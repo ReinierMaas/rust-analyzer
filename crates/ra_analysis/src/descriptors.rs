@@ -11,7 +11,7 @@ use {
     imp::FileResolverImp,
 };
 
-#[derive(Debug, Hash)]
+#[derive(Debug, PartialEq, Eq, Hash)]
 pub struct ModuleDescriptor {
     pub submodules: Vec<Submodule>
 }
@@ -42,7 +42,7 @@ pub struct Submodule {
     pub name: SmolStr,
 }
 
-#[derive(Hash, Debug)]
+#[derive(Debug, PartialEq, Eq, Hash)]
 pub(crate) struct ModuleTreeDescriptor {
     nodes: Vec<NodeData>,
     links: Vec<LinkData>,
@@ -51,7 +51,7 @@ pub(crate) struct ModuleTreeDescriptor {
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
 struct Node(usize);
-#[derive(Hash, Debug)]
+#[derive(Hash, Debug, PartialEq, Eq)]
 struct NodeData {
     file_id: FileId,
     links: Vec<Link>,
@@ -60,7 +60,7 @@ struct NodeData {
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
 pub(crate) struct Link(usize);
-#[derive(Hash, Debug)]
+#[derive(Hash, Debug, PartialEq, Eq)]
 struct LinkData {
     owner: Node,
     name: SmolStr,
@@ -69,7 +69,7 @@ struct LinkData {
 }
 
 
-#[derive(Clone, Debug, Hash)]
+#[derive(Clone, Debug, Hash, PartialEq, Eq)]
 pub enum Problem {
     UnresolvedModule {
         candidate: RelativePathBuf,
